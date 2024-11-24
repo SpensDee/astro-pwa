@@ -1,0 +1,63 @@
+---
+import { Image, getImage } from "astro:assets";
+import { content, manifest } from "../../config";
+import { sliceText } from "../../functions/utils";
+const { SEO, Android, IOS, Windows, Protect } = Astro.props;
+
+const description = sliceText(content.description, 160)
+import icon from '@assets/icon.jpg';
+
+// Генерация иконок для различных размеров
+const icon16 = await getImage({ src: icon, width: 16, height: 16, format: "png" });
+const icon32 = await getImage({ src: icon, width: 32, height: 32, format: "png" });
+const icon48 = await getImage({ src: icon, width: 48, height: 48, format: "png" });
+const icon96 = await getImage({ src: icon, width: 96, height: 96, format: "png" });
+const icon192 = await getImage({ src: icon, width: 192, height: 192, format: "png" });
+const icon512 = await getImage({ src: icon, width: 512, height: 512, format: "png" });
+
+// Генерация иконок для iOS (ретина-дисплеи)
+const appleIcon120 = await getImage({ src: icon, width: 120, height: 120, format: "png" });
+const appleIcon152 = await getImage({ src: icon, width: 152, height: 152, format: "png" });
+const appleIcon167 = await getImage({ src: icon, width: 167, height: 167, format: "png" });
+const appleIcon180 = await getImage({ src: icon, width: 180, height: 180, format: "png" });
+
+// Генерация плиточной иконки для Windows
+const mstile144 = await getImage({ src: icon, width: 144, height: 144, format: "png" });
+---
+
+
+{SEO && 
+<title>{content.title} - Apps on Google Play</title>
+<meta name="description" content={description} />}
+
+{Android && 
+<meta name="theme-color" content={manifest.theme_color} />
+<link rel="icon" type="image/png" sizes="16x16" href={icon16.src} />
+<link rel="icon" type="image/png" sizes="32x32" href={icon32.src} />
+<link rel="icon" type="image/png" sizes="48x48" href={icon48.src} />
+<link rel="icon" type="image/png" sizes="96x96" href={icon96.src} />
+<link rel="icon" type="image/png" sizes="192x192" href={icon192.src} />
+<link rel="icon" type="image/png" sizes="512x512" href={icon512.src} />
+
+<link rel="manifest" href="/manifest.json" />
+}
+
+{IOS && 
+<link rel="apple-touch-icon" sizes="120x120" href={appleIcon120.src} />
+<link rel="apple-touch-icon" sizes="152x152" href={appleIcon152.src} />
+<link rel="apple-touch-icon" sizes="167x167" href={appleIcon167.src} />
+<link rel="apple-touch-icon" sizes="180x180" href={appleIcon180.src} />
+<link rel="apple-touch-startup-image" href={content.icon}/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content={description}/>}
+
+<!-- {Windows &&
+<meta name="msapplication-config" content="browserconfig.xml" /> 
+<meta name="msapplication-starturl" content={manifest.start_url} />}
+<meta name="msapplication-TileImage" content={mstile144.src} />
+<meta name="msapplication-TileColor" content="#FFFFFF" /> -->
+
+{Protect &&
+    <meta name="referrer" content="no-referrer" />}
+

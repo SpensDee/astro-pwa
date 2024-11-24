@@ -1,0 +1,88 @@
+---
+const {rating, reviews, installed} = Astro.props
+import { Image } from "astro:assets";
+import iconRating from '../components/assets/image/star.svg'
+import howOld from '../components/assets/image/3+.webp'
+import infoIcon from '../components/assets/image/info.png'
+function formatNumberShort(value, maximumFractionDigits = 1 ) {
+    if (!Number.isFinite(value)) return value ; 
+
+    const formatter = new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        compactDisplay: 'short',
+        maximumFractionDigits: maximumFractionDigits, 
+    });
+	return `${formatter.format(value)} +`;
+}
+---
+<div class=" app-statistic">
+    <div class="app-statistic__card ">
+        <div class="app-statistic__title">{rating || 4.6 }<Image src={iconRating} alt="star" width="12" height="12"></div>
+        <div class="app-statistic__subtitle">{formatNumberShort((reviews ||258000000),2)} reviews</div>
+    </div>
+    <div class="app-statistic__card ">
+        <div class="app-statistic__title">{formatNumberShort(installed || 51000000)}</div>
+        <div class="app-statistic__subtitle">Downloads</div>
+    </div>
+    <div class="app-statistic__card ">
+        <div class="app-statistic__title">
+            <Image src={howOld} alt="how old icons" width="16" height="17">
+        </div>
+        <div class="app-statistic__subtitle ">Rated for 3+      <Image src={infoIcon} alt="info icon" width="12" height="12"> </div>
+    </div>
+</div>
+<style is:global>
+    .app-statistic{
+	display: flex;
+	margin-bottom: 36px;
+	padding-top: 31px;
+	background-color: #202124;
+}
+.app-statistic__card{
+	padding-right: 14px;
+	position: relative;
+}
+.app-statistic__title{
+	color: #e8eaed;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 600;
+	font-family:  "Google Sans", Roboto, Arial, sans-serif;
+}
+
+.app-statistic__card,
+.app-statistic__card {
+	padding-inline: 22px;
+	position: relative;
+}
+.app-statistic__card:not(:last-child)::after{
+	content: "";
+	display: block;
+	height: 24px;
+	right: 0;
+	position: absolute;
+	top: calc(50% - 12px);
+	width: 1px;
+	background-color:rgb(60, 64, 67);
+}
+.app-statistic__subtitle{
+	font-family: Roboto, Arial, sans-serif;
+    line-height: 1rem;
+    font-size: 12px;
+ 	font-weight: 400;
+	margin-top: 6px;
+}
+.app-statistic__title img{
+margin-left: 3px;
+margin-top: 2px;
+}
+.app-statistic__subtitle,
+.app-statistic__title{
+	display: flex;
+	justify-content: center;
+}
+.app-statistic__subtitle img{
+	margin-left: 7px;
+}
+
+</style>

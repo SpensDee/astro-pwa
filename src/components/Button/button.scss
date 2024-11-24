@@ -1,0 +1,86 @@
+.button {
+  background-color: rgb(0, 135, 95);
+  color: white;
+  outline: transparent;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 240px;
+  height: 35px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button::after {
+  content: "";
+  width: 0;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  display: inline-block;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.6;
+}
+
+.button:focus::after {
+  animation: pulse 0.6s ease-out 1;
+}
+
+@keyframes pulse {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+.loader-install {
+  width: 40px;
+  aspect-ratio: 2;
+  --_g1: no-repeat radial-gradient(circle closest-side, #4285f4 90%, #0000);
+  --_g2: no-repeat radial-gradient(circle closest-side, #ea4335 90%, #0000);
+  --_g3: no-repeat radial-gradient(circle closest-side, #fbbc05 90%, #0000);
+  background: var(--_g1) 0% 50%, var(--_g2) 50% 50%, var(--_g3) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1.4s infinite ease-out;
+}
+
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
+.loader-load {
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  background: #33d8bf;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l4 1s infinite linear;
+}
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}

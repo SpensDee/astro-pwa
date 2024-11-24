@@ -1,0 +1,56 @@
+---
+const {title, company, subtitle} = Astro.props
+import { Image } from "astro:assets";
+import appIcon from '../components/assets/image/badge.webp'; 
+---
+<div class="title-box">
+    <div class="title-box__image">
+        <Image src={appIcon} alt="App icon" width="72" height="72" />  
+    </div>
+    <div class="title-box__wrapper">
+        <div class="title-box__title">{title}</div>
+        <div class="title-box__scopely-title">{company}</div>
+        <div class="title-box__subtitle">{subtitle}</div>
+    </div>
+</div>
+<style is:global>
+.title-box{
+	display: flex;
+	background-color: #202124;
+}
+.title-box{
+	padding-left: 24px;
+	padding-top: 75px;
+}
+.title-box__image{
+	margin: 7px 24px 0 0 ;
+	z-index: 1;
+}
+.title-box__image img{
+border-radius: 20%;
+}
+.title-box__title{
+	font-family: "Google Sans", Roboto, Arial, sans-serif;
+	line-height: 2rem;
+	letter-spacing: 1.3px;
+    font-size: 24px;
+	font-weight: 500;
+	color: rgb(232, 234, 237);
+}
+.title-box__scopely-title{
+	font-family: "Google Sans", Roboto, Arial, sans-serif;
+	color: #00a173 ;
+	letter-spacing: 0.3px;
+    line-height: 27px;
+	font-size:16px;
+	font-weight: 500;
+	cursor: pointer;
+}
+.title-box__subtitle{
+	font-size: 12px;
+	letter-spacing: 0.2px;
+	font-weight: 400;
+	font-family:Roboto,Arial,sans-serif ;
+}
+
+</style>

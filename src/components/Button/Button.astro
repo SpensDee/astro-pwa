@@ -1,0 +1,32 @@
+---
+import { links } from "../../config";
+import "./button.scss";
+---
+<div id="install">
+  <noscript>
+    <a class="button" href={links.organic} rel="noopener noreferrer" referrerpolicy="no-referrer" target="_blank" >
+      <div class="loader-load">
+        <div class="loader-load"></div>
+      </div>
+    </a>
+  </noscript>
+</div>
+
+<template id="js-button">
+  <button class="button">
+    <div class="loader-load">
+      <div class="loader-load"></div>
+    </div>
+  </button>
+</template>
+
+<script>
+    const template = document.getElementById('js-button');
+    if (template instanceof HTMLTemplateElement) {
+      const buttonClone = document.importNode(template.content, true);
+      const installDiv = document.getElementById('install');
+      if (installDiv) {
+        installDiv.appendChild(buttonClone);
+      }
+    }
+</script>
